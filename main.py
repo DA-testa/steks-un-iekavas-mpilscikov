@@ -25,8 +25,12 @@ def find_mismatch(text):
 
 
 def main():
+    
     text = input()
-    _, text = text.split('\n') 
+
+    # For GitHub tests
+    if 'I' in text[0]:
+        text = input()
 
     mismatch = find_mismatch(text)
     
