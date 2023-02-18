@@ -13,18 +13,39 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
-            # Process opening bracket, write your code here
-            pass
+            opening_brackets_stack.append(Bracket(next, i + 1))
 
         if next in ")]}":
-            # Process closing bracket, write your code here
-            pass
+            if not opening_brackets_stack:
+                return i + 1
+
+            last_opening = opening_brackets_stack.pop().char
+            if not are_matching(last_opening, next):
+                return i + 1
+
+    else:
+        if opening_brackets_stack:
+            return opening_brackets_stack[0].position
+
+    return -1
+            
 
 
 def main():
+    
     text = input()
+
+    # For GitHub tests
+    if 'I' in text[0]:
+        text = input()
+
     mismatch = find_mismatch(text)
-    # Printing answer, write your code here
+    
+    if mismatch == -1:
+        print('Success')
+
+    else:
+        print(mismatch)
 
 
 if __name__ == "__main__":
